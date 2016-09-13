@@ -36,14 +36,7 @@ class Plane(Object):
 		self.math_repr = geo.Plane(normal,intercept)
 
 	def intersection(self,ray):
-		div=geo.Vector.dot(ray.direction,self.math_repr.normal)
-		if div==0:	# Plane and ray are parallel!
-			return None
-		t = -(geo.Vector.dot(ray.position,self.math_repr.normal)+self.math_repr.intercept)/div
-		if t>0:
-			return t
-		else:
-			return None
+		return self.math_repr.intersection(ray)
 
 	def normal_at(self,position):
 		return self.math_repr.normal
@@ -73,18 +66,22 @@ class Sphere(Object):
 		self.math_repr = geo.Sphere(position,radius)
 
 	def intersection(self,ray):
-		tca=geo.Vector.dot(self.math_repr.position-ray.position,ray.direction)
-		if tca<0:
-			return None
-		d2=geo.Vector.dot(self.math_repr.position-ray.position,self.math_repr.position-ray.position)-tca*tca
-		if d2 > self.math_repr.radius ** 2:
-			return None
-		thc=math.sqrt(self.math_repr.radius ** 2 - d2)
-		ret=min(tca-thc,tca+thc)
-		if ret<0:
-			return None
-		else:
-			return ret
+		return self.math_repr.intersection(ray)
+
+	def normal_at(self,position):
+		return (position-self.math_repr.position).normalize()
+	
+	def color_at(self,position):
+		return self.material.color
+		
+
+class Mesh(Object):	
+	
+	def __init__(self,material,position):
+		super().__init__(material)
+
+	def intersection(self,ray):
+		raise NotImplemented
 
 	def normal_at(self,position):
 		return (position-self.math_repr.position).normalize()
