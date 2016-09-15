@@ -22,9 +22,3 @@ class PointLight(Light):
 		self.position = position
 		self.intensity = intensity
 		self.atten_factors = atten_factors
-
-class CircularSpotLight(PointLight):
-	def __init__(self,color,position,direction,intensity,angle):
-		super().__init__(color,position,intensity)
-		self.direction = direction
-		self.angle = angle

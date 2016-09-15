@@ -9,7 +9,7 @@ from pyglare.scene.environment import Environment
 from pyglare.scene.objects import Material
 from pyglare.scene.objects import Plane,CheckerboardUpPlane,Sphere
 from pyglare.math import geometry as geo
-from pyglare.scene.light import PointLight,AmbientLight,DirectionalLight,CircularSpotLight
+from pyglare.scene.light import PointLight,AmbientLight,DirectionalLight
 import math
 
 if __name__ == '__main__':

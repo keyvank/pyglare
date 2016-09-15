@@ -1,7 +1,7 @@
 from ..math.geometry import Ray,Vector
 from .objects import Plane,Sphere
 from ..image.color import Color
-from .light import PointLight,AmbientLight,DirectionalLight,CircularSpotLight
+from .light import PointLight,AmbientLight,DirectionalLight
 from multiprocessing import Process,Manager
 from threading import Thread
 import math
@@ -19,7 +19,6 @@ class Engine:
 		self._ambient_lights = [l for l in self.environment.lights if type(l) is AmbientLight]
 		self._point_lights = [l for l in self.environment.lights if type(l) is PointLight]
 		self._directional_lights = [l for l in self.environment.lights if type(l) is DirectionalLight]
-		self._circular_spot_lights = [l for l in self.environment.lights if type(l) is CircularSpotLight]
 	
 	def _render_range(self,start,end,rows):
 		for h in range(start,end):
@@ -120,23 +119,6 @@ class Engine:
 					factor=diffuse_factor + specular_factor
 					
 					ret = ret+l.color*l.intensity*col*factor
-			
-			for l in self._circular_spot_lights:
-				light_ray_dir=(l.position-pos).normalize()
-				if not self._is_in_shadow(Ray(pos,light_ray_dir),l.position):
-					
-					ang = math.acos(Vector.dot(light_ray_dir,-l.direction))
-					if ang < l.angle/2:
-					
-						specular_factor=max(Vector.dot(norm.reflect(light_ray_dir),-ray.direction),0) ** nearest_obj.material.specular_exponent * nearest_obj.material.specular_rate
-						
-						diffuse_factor=max(Vector.dot(light_ray_dir,norm),0) * nearest_obj.material.diffuse_rate
-						
-						factor=diffuse_factor + specular_factor
-						dist=(l.position-pos).length()
-						atten=1.0/(l.atten_factors[0]+l.atten_factors[1]*dist+l.atten_factors[2]*dist*dist)
-						
-						ret = ret+l.color*l.intensity*col*factor*atten
 			
 			if nearest_obj.material.reflection_rate:
 				addcol=col*self._trace_ray(Ray(pos,norm.reflect(-ray.direction)),depth+1) * nearest_obj.material.reflection_rate
