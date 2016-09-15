@@ -4,14 +4,12 @@ import math
 
 class Material:
 	
-	def __init__(self,color,diffuse_rate,specular_rate,specular_exponent,reflection_rate,refraction_rate,refractive_index):
+	def __init__(self,color,diffuse_rate,specular_rate,specular_exponent,reflection_rate):
 		self.color = color
 		self.diffuse_rate = diffuse_rate
 		self.specular_rate = specular_rate
 		self.specular_exponent = specular_exponent
 		self.reflection_rate = reflection_rate
-		self.refraction_rate = refraction_rate
-		self.refractive_index = refractive_index
 
 class Object:
 	

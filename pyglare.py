@@ -16,17 +16,10 @@ if __name__ == '__main__':
 	f = Frame(2000,2000,color.BLACK)
 	env = Environment()
 	
-	#env.objects.append(Plane(Material(color.GREEN,1,0,0,0,0,0),geo.Vector(0,-1,0),200))
-	#env.objects.append(Plane(Material(color.BLUE,1,0,0,0,0,0),geo.Vector(0,1,0),200))
-	#env.objects.append(Plane(Material(color.MAGENTA,1,0,0,0,0,0),geo.Vector(1,0,0),200))
-	#env.objects.append(Plane(Material(color.CYAN,1,0,0,0,0,0),geo.Vector(-1,0,0),200))
-	#env.objects.append(Plane(Material(color.RED,1,0,0,0,0,0),geo.Vector(0,0,-1),200))
-	#env.objects.append(Plane(Material(color.RED,1,0,0,0,0,0),geo.Vector(0,0,1),670))
-	
-	env.objects.append(CheckerboardUpPlane(Material(color.WHITE,1,0.1,1,0.3,0,1),200,200,color.BLACK))
-	env.objects.append(Sphere(Material(color.RED,1,1,8,0.5,0,1),geo.Vector(140,-100,0),100))
-	env.objects.append(Sphere(Material(color.YELLOW,1,1,8,0.5,0,1),geo.Vector(0,0,450),200))
-	env.objects.append(Sphere(Material(color.GREEN,1,1,8,0.5,0,1),geo.Vector(-140,-90,0),110))
+	env.objects.append(CheckerboardUpPlane(Material(color.WHITE,1,0.1,1,0.3),200,200,color.BLACK))
+	env.objects.append(Sphere(Material(color.RED,1,1,8,0.5),geo.Vector(140,-100,0),100))
+	env.objects.append(Sphere(Material(color.YELLOW,1,1,8,0.5),geo.Vector(0,0,450),200))
+	env.objects.append(Sphere(Material(color.GREEN,1,1,8,0.5),geo.Vector(-140,-90,0),110))
 	
 	env.lights.append(AmbientLight(color.Color(0.05,0.05,0.05)))
 	env.lights.append(DirectionalLight(color.Color(0.1,0.1,0.1),geo.Vector(1,-1,1).normalize(),6))

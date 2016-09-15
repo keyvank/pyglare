@@ -141,26 +141,5 @@ class Engine:
 			if nearest_obj.material.reflection_rate:
 				addcol=col*self._trace_ray(Ray(pos,norm.reflect(-ray.direction)),depth+1) * nearest_obj.material.reflection_rate
 				ret = ret + addcol
-				
-			if nearest_obj.material.refraction_rate:
-				i = math.acos(Vector.dot(-ray.direction,norm))
-				try:
-					if from_inside:
-						r = math.asin(math.sin(i)*nearest_obj.material.refractive_index)
-					else:
-						r = math.asin(math.sin(i)/nearest_obj.material.refractive_index)
-									
-					C=Vector.cross(-ray.direction,-norm)
-					a=Vector.cross(norm,C).normalize()
-					
-					refract_dir=(a*math.sin(r)-norm*math.cos(r)).normalize()
-					
-					refract_ray=Ray(pos-norm*2*Engine.BIAS,refract_dir)
-					
-					
-					addcol=col*self._trace_ray(refract_ray,depth+1,not from_inside) * nearest_obj.material.refraction_rate
-					
-					ret = ret + addcol
-				except:
-					return Color(0,1,0)
+			
 		return ret
