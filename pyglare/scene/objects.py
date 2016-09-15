@@ -71,18 +71,3 @@ class Sphere(Object):
 	
 	def color_at(self,position):
 		return self.material.color
-		
-
-class Mesh(Object):	
-	
-	def __init__(self,material,position):
-		super().__init__(material)
-
-	def intersection(self,ray):
-		raise NotImplemented
-
-	def normal_at(self,position):
-		return (position-self.math_repr.position).normalize()
-	
-	def color_at(self,position):
-		return self.material.color
