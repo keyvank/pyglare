@@ -31,7 +31,7 @@ if __name__ == '__main__':
 	env.lights.append(AmbientLight(color.Color(0.05,0.05,0.05)))
 	env.lights.append(DirectionalLight(color.Color(0.1,0.1,0.1),geo.Vector(1,-1,1).normalize(),6))
 	
-	e = Eye.create_lookat(geo.Vector(0,290,-590),geo.Vector(0,0,80),geo.Vector(0,1,0),f.width/f.height)
+	e = Eye.create_lookat(geo.Vector(0,324,-532),geo.Vector(0,0,80),geo.Vector(0,1,0),f.width/f.height)
 	
 	eng = Engine(e,env,f,4,8)
 	
